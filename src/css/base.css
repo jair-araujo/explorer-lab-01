@@ -56,7 +56,7 @@ body {
   align-items: center;
 }
 
-#app #alert-confirm {
+#app .alert-confirm {
   background: rgb(20, 196, 47);
   position: absolute;
   top: 1rem;
@@ -69,7 +69,7 @@ body {
   animation-fill-mode: both;
   animation-timing-function: background ease-in-out;
 }
-#app #alert-error {
+#app .alert-error {
   background: rgb(203, 43, 43);
   position: absolute;
   top: 1rem;

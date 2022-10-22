@@ -74,21 +74,6 @@ const cardNumberPattern = {
 
 const cardNumberMasked = IMask(cardNumber, cardNumberPattern)
 
-const addButton = document.querySelector("#add-card")
-
-addButton.addEventListener("click", () => {
-  const alertConfirm = document
-    .querySelector("#alert-confirm")
-    .classList.remove("hide")
-  const alertError = document
-    .querySelector("#alert-error")
-    .classList.remove("hide")
-})
-
-document.querySelector("form").addEventListener("submit", event => {
-  event.preventDefault()
-})
-
 const cardHolder = document.querySelector("#card-holder")
 cardHolder.addEventListener("input", () => {
   const ccHolder = document.querySelector(".cc-holder .value")
@@ -124,4 +109,38 @@ expirationDateMasked.on("accept", () => {
 function updateExpirationDate(date) {
   const ccExpirationDate = document.querySelector(".cc-extra .value")
   ccExpirationDate.innerText = date.length === 0 ? "02/32" : date
+}
+
+document.querySelector("form").addEventListener("submit", event => {
+  event.preventDefault()
+  const addButton = document.querySelector("#add-card")
+
+  addButton.addEventListener("click", () => {
+    handleInputs()
+  })
+})
+
+function handleInputs() {
+  const formInputs = document.querySelectorAll(".input-wrapper input")
+  formInputs.forEach(inputValue => {
+    if (inputValue.value === "" || undefined) {
+      alertError()
+    } else {
+      alertSuccess()
+    }
+  })
+}
+
+const alertEvent = document.querySelector("#alert")
+
+function alertSuccess() {
+  alertEvent.classList.replace("hide", "alert-confirm")
+  alertEvent.children[0].textContent = "Cartão Adicionado com Sucesso!"
+  alertEvent.classList.replace("alert-error", "alert-confirm")
+}
+
+function alertError() {
+  alertEvent.classList.replace("hide", "alert-error")
+  alertEvent.children[0].textContent = "Preencha os dados corretamente!"
+  alertEvent.classList.replace("alert-confirm", "alert-error")
 }
